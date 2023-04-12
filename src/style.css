@@ -1,0 +1,61 @@
+/** Globals **/
+@font-face {
+  font-family: oratorStdMedium;
+  src: url(./fonts/Orator_Std_Medium.ttf) format('truetype');
+}
+
+:root{
+  --clr-primary-dark-blue: #1A4273;
+  --clr-primary-light-blue: #009FE3;
+
+  --clr-neutral-100: #FFFFFF;
+  --clr-neutral-300: #DADADA;
+  --clr-neutral-500: #A8A8A8;
+  --clr-neutral-700: #6F6F6E;
+  --clr-neutral-900: #000000;
+
+  --ff-headings: 'oratorStdMedium';
+  --ff-tiles: 'Saira', sans-serif;
+  --ff-text: 'Saira', sans-serif;
+}
+
+*, *::after, *::before{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--ff-headings);
+  font-weight: 400;
+}
+
+body{
+  font-family: var(--ff-text);
+  padding: 1rem;
+  overflow: hidden;
+  background-color: var(--clr-neutral-300);
+}
+
+button{
+  cursor: pointer;
+  appearance: none;
+  border: none;
+  outline: none;
+  background-color: none;
+}
+
+ul{
+  list-style: none;
+}
+
+a{
+  text-decoration: none;
+  color: inherit;
+}
+
+@media screen and (min-width: 768px) {
+  body{
+    padding: 2rem;
+  }
+}
