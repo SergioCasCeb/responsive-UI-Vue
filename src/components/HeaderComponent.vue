@@ -1,13 +1,10 @@
 <template>
     <header>
-        <h1>Dashboard</h1>
+        <h1>{{ $route.name }}</h1>
 
         <div class="user-settings">
-            <div class="theme-toggle-container">
-                <label for="theme"></label>
-                <input type="checkbox" name="theme-toggle" id="theme-toggle" class="theme-toggle">
-            </div>
-            <div class="user-container" :class="`${open ? 'open' : ''}`" @click="UserMenu">
+            <ThemeBtn @btn-click="$emit('toggle-theme')" class="theme-btn"/>
+            <div class="user-container" :class="`${ open ? 'open' : ''}`" @click="userMenu">
                 <i class="material-icons-round user-icon">
                 account_circle
                 </i>
@@ -18,7 +15,7 @@
                     <ul>
                         <li><RouterLink to="/">Profile</RouterLink></li>
                         <li><RouterLink to="/">Settings</RouterLink></li>
-                        <li><RouterLink to="/">Log out</RouterLink></li>
+                        <li><RouterLink to="/login">Log out</RouterLink></li>
                     </ul>
                 </div>
             </div>
@@ -27,12 +24,12 @@
 </template>
 
 <script setup lang="ts">
+import ThemeBtn from './ThemeBtn.vue'
 
 import { ref } from 'vue'
 const open = ref(false)
-const UserMenu = () => {
+const userMenu = () => {
     open.value = !open.value
-    console.log(open.value);
 }
 
 </script>
@@ -56,55 +53,9 @@ header{
         align-items: center;
         justify-content: center;
 
-        .theme-toggle-container{
-            margin-right: 1rem;
-            height: 1.5rem;
-            label{
-                display: block;
-                width: 0;
-                height: 0;
-            }
-
-            input[type="checkbox"]{
-                appearance: none;
-                width: 3.5rem;
-                height: 1.5rem;
-                border-radius: 50vw;
-                background-color: var(--clr-neutral-500);
-                position: relative;
-                cursor: pointer;
-                transition: background-color 250ms ease-in-out;
-
-                &::before{
-                    position: absolute;
-                    font-family: 'Material Icons Round';
-                    content: 'light_mode';
-                    font-size: .8rem;
-                    background-color: var(--clr-neutral-100);
-                    border-radius: 50%;
-                    top: 50%;
-                    left: .3rem;
-                    transform: translateY(-50%);
-                    width: 1rem;
-                    height: 1rem;
-                    display: grid;
-                    place-items: center;
-                    transition: all 350ms ease-in-out;
-                }
-            }
-
-            input[type="checkbox"]:checked{
-                background-color: var(--clr-neutral-700);
-
-                &::before{
-                    content: 'dark_mode';
-                    left: 2.2rem;
-                    background-color: var(--clr-neutral-900);
-                    color: var(--clr-neutral-100);
-                }
-            }
+        .theme-btn{
+            display: none;
         }
-
         .user-container{
             height: 2rem;
             position: relative;
@@ -118,20 +69,22 @@ header{
                 transform: rotate(0);
                 transition: transform 250ms ease-in-out;
             }
-
             .user-menu{
                 position: absolute;
+                z-index: 100;
                 top: 4rem;
                 right: -.8rem;
-                width: 8.5rem;
+                width: 9rem;
                 height: 0;
                 background-color: var(--clr-neutral-100);
                 border-radius: 10px;
                 pointer-events: none;
-                transition: height 250ms ease-in-out 100ms;
-
+                overflow: hidden;
+                transition: all 250ms ease-in-out 100ms;
+                
                 ul{
                     opacity: 0;
+                    font-family: var(--ff-text);
                     transition: opacity 100ms ease-in-out 0ms;
 
                     li{
@@ -153,9 +106,11 @@ header{
                 }
 
                 .user-menu{
-                    height: calc(8rem - 2px);
-                    transition: height 250ms ease-in-out 0ms;
+                    height: 8rem;
                     pointer-events: all;
+                    border: 1px solid var(--clr-neutral-300);
+                    box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.1);
+                    transition: all 250ms ease-in-out 0ms;
 
                     ul{
                         opacity: 1;
@@ -165,6 +120,16 @@ header{
             }
         }
         
+    }
+}
+
+@media screen and (min-width: 500px) {
+    header{
+        .user-settings{
+            .theme-btn{
+                display: block;
+            }
+        }
     }
 }
 

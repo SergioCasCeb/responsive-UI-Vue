@@ -25,45 +25,33 @@
 
         <div class="menu-toggle-wrap">
             <div class="menu-toggle" @click="ToggleMenu">
-                <i class="material-icons-round">
-                    double_arrow
-                </i>
+                <i class="fa-solid fa-angles-right"></i>
             </div>
         </div>
 
         <nav class="navigation">
             <RouterLink class="btn" to="/">
-                <i class="material-icons-round">
-                    dashboard
-                </i>
+                <i class="fa-solid fa-house"></i>
                 <p class="txt">Home</p>
             </RouterLink>
 
             <RouterLink class="btn" to="/lectures">
-                <i class="material-icons-round">
-                    menu_book
-                </i>
+                <i class="fa-solid fa-book"></i>
                 <p class="txt">Lectures</p>
             </RouterLink>
 
             <RouterLink class="btn" to="/calendar">
-                <i class="material-icons-round">
-                    calendar_month
-                </i>
+                <i class="fa-regular fa-calendar-days"></i>
                 <p class="txt">Calendar</p>
             </RouterLink>
 
-            <RouterLink class="btn" to="/Analytics">
-                <i class="material-icons-round">
-                    leaderboard
-                </i>
+            <RouterLink class="btn" to="/analytics">
+                <i class="fa-solid fa-chart-pie"></i>
                 <p class="txt">Analytics</p>
             </RouterLink>
 
             <RouterLink class="btn" to="/tasks">
-                <i class="material-icons-round">
-                    checklist
-                </i>
+                <i class="fa-solid fa-list-check"></i>
                 <p class="txt">Tasks</p>
             </RouterLink>
 
@@ -71,9 +59,7 @@
 
         <div class="log-out-container">
             <RouterLink class="btn" to="/logout">
-                <i class="material-icons-round">
-                    logout
-                </i>
+                <i class="fa-solid fa-right-from-bracket"></i>
                 <p class="txt">Logout</p>
             </RouterLink>
         </div>
@@ -90,14 +76,16 @@ const ToggleMenu = () => {
 
 <style lang="scss" scoped>
 aside{
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
+    position: fixed;
+    bottom: 1rem;
+    left: 1rem;
+    width: calc(100% - 2rem);
     height: fit-content;
-    background-color: var(--clr-primary-dark-blue);
+    background-color: #1A4273;
     padding: .8rem;
     border-radius: 10px;
+    user-select: none;
+    z-index: 999;
 
     .logo, .menu-toggle-wrap, .log-out-container{
         display: none;
@@ -126,19 +114,19 @@ aside{
             cursor: pointer;
             transform: rotate(0);
             transition: transform 250ms ease-in-out;
-            .material-icons-round {
-                font-size: 1.5rem;  
+            i {
+                font-size: 1rem;  
                 transform: translateX(0);
                 transition: transform 250ms ease-in-out;
             }
 
-            &:hover .material-icons-round {
+            &:hover i {
                 transform: translateX(5px);
             }
         }
     }
 
-    .material-icons-round {
+   i {
         cursor: pointer;
         color: var(--clr-neutral-500);
     }
@@ -150,7 +138,6 @@ aside{
         justify-content: space-between;
 
         .btn{
-            // --size-icon: 2rem:
             height: 2.8rem;
             width: 2.8rem;
             gap: 0;
@@ -160,8 +147,8 @@ aside{
             justify-content: center;
             text-decoration: none;
 
-            .material-icons-round {
-                font-size: 2rem;
+            i {
+                font-size: 1.5rem;
             }
             .txt{
                 display: none;
@@ -170,11 +157,12 @@ aside{
                 transform: scaleX(0);
                 transform-origin: left;
                 color: var(--clr-neutral-500);
+                font-family: var(--ff-text);
             }
 
             &.router-link-exact-active{
                 background-color: #009fe32e;
-                .material-icons-round {
+                i {
                     color: var(--clr-primary-light-blue);
                 }
                 .txt {
@@ -193,8 +181,8 @@ aside{
             text-decoration: none;
             gap: 0;
 
-            .material-icons-round {
-                font-size: 2rem;
+            i {
+                font-size: 1.5rem;
             }
             .txt{
                 display: none;
@@ -203,12 +191,13 @@ aside{
                 transform: scaleX(0);
                 transform-origin: left;
                 color: var(--clr-neutral-500);
+                font-family: var(--ff-text);
             }
         }
     }
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 1024px) {
     aside {
         position: unset;
         width: calc(60px + 2rem);
@@ -244,7 +233,7 @@ aside{
                 border-radius: 0;
                 justify-content: flex-start;
                 
-                .material-icons-round, .txt{
+                i, .txt{
                     transition: color 250ms ease-in-out;
                 }
 
@@ -256,7 +245,7 @@ aside{
 
                 &:hover, &.router-link-exact-active{
                     background-color: unset;
-                    .material-icons-round {
+                    i {
                         color: var(--clr-primary-light-blue);
                     }
                     .txt {
@@ -277,6 +266,15 @@ aside{
             padding-left: 2rem;
 
             .btn{
+                &:hover, &.router-link-exact-active{
+                    background-color: unset;
+                    i {
+                        color: var(--clr-primary-light-blue);
+                    }
+                    .txt {
+                        color: var(--clr-primary-light-blue);
+                    }
+                }
                 .txt{
                     display: block;
                     height: auto;
@@ -287,7 +285,7 @@ aside{
         &.is-expanded {
             width: 12rem;
             .menu-toggle-wrap {
-                top: -4.5rem;
+                top: -3.5rem;
                 .menu-toggle {
                     transform: rotate(180deg);
                 }

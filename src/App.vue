@@ -1,38 +1,53 @@
 <template>
-  <div class="app">
-    <Sidebar />
-    <div class="main-content">
-      <HeaderComponent />
-      <RouterView></RouterView>
-    </div>
+  <div class="app" :class="`${darkMode ? 'dark-mode' : ''}`">
+      <RouterView @toggle-theme="toggleTheme"></RouterView>
   </div>
 </template>
 
 <script setup lang="ts">
-  import Sidebar from './components/Sidebar.vue'
-  import HeaderComponent from './components/Header.vue'
+  import { ref } from 'vue'
+  const darkMode = ref(false)
+  function toggleTheme(){
+    darkMode.value = !darkMode.value
+  }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+
+.dark-mode{
+  --clr-neutral-100: #000000;
+  --clr-neutral-300: #6F6F6E;
+  --clr-neutral-900: #FFFFFF;
+
+  --clr-primary-dark-blue: #FFFFFF;
+}
 
 .app{
-  position: relative;
-  display: flex;
-  height: calc(100vh - 2rem);
+  height: 100%;
+  background-color: var(--clr-neutral-300);
 
-  .main-content{
-    flex: 1 1 0;
+  .container{
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
   }
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 1024px){
   .app{
-    height: calc(100vh - 4rem);
+    overflow: hidden;
+    height: 100vh;
 
-    .main-content{
-      padding-left: 2rem;
+    .container{
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      max-height: 100%;
     }
   }
+
 }
 
 </style>
